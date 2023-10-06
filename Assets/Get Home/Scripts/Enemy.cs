@@ -5,10 +5,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public int maxHealth = 40;
-    private int currentHealth;
+    protected int currentHealth;
     public Animator animator;
+
+    protected bool keepActive = false; // used for child classes
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         currentHealth = maxHealth;
     }
@@ -32,11 +35,14 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Die()
+    private void Die()
     {
         animator.SetBool("IsDead", true);
-
         GetComponent<Collider2D>().enabled = false;
-        this.enabled = false;
+
+        if (!keepActive)
+        {
+            this.enabled = false;
+        }
     }
 }

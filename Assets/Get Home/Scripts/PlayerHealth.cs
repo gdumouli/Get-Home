@@ -13,8 +13,8 @@ public class PlayerHealth : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = maxHealth;
         healthBar.GetComponent<Slider>().maxValue = maxHealth;
+        setFullHealth();
     }
 
     // Update is called once per frame
@@ -35,6 +35,12 @@ public class PlayerHealth : MonoBehaviour
             dead = true;
             Death();
         }
+    }
+
+    public void setFullHealth()
+    {
+        currentHealth = maxHealth;
+        DisplayHealth();
     }
 
     void DisplayHealth()
